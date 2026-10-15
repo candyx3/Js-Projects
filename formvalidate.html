@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Validation</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input {
+            display: block;
+            width: 250px;
+            padding: 10px;
+            margin: 10px auto;
+        }
+        button {
+            padding: 10px 30px;
+        }
+        p {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h2>Registration Form</h2>
+    <form onsubmit="return checkForm()">
+        <input type="text" id="name" placeholder="Enter name">
+        <p id="nameError"></p>
+        <input type="email" id="email" placeholder="Enter email">
+        <p id="emailError"></p>
+        <input type="password" id="password" placeholder="Enter password">
+        <p id="passwordError"></p>
+        <button type="submit">Submit</button>
+    </form>
+    <script>
+        function checkForm() {
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            if (name === "") {
+                document.getElementById("nameError").innerText =
+                    "Name is required";
+                return false;
+            }
+            if (email === "") {
+                document.getElementById("emailError").innerText =
+                    "Email is required";
+                return false;
+            }
+            if (password === "") {
+                document.getElementById("passwordError").innerText =
+                    "Password is required";
+                return false;
+            }}
+    </script>
+</body>
+</html>

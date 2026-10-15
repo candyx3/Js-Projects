@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ecom</title>
+<style>
+    * {
+        margin:0;
+        padding:0;
+        box-sizing: border-box;
+    }
+    body {
+        margin: 0;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+    }
+    h1 {
+        text-align: center;
+        color: #222;
+    }
+    body > p {
+        text-align: center;
+        color: #666;
+        margin-bottom: 30px;
+    }
+    .products-container {
+        display: grid;
+        grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
+        gap: 20px;
+        width: 100%;
+    }
+    .product-card {
+        min-width: 0;
+        max-width: 100%;
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow:0 3px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: 0.3s;
+    }
+    .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+    .product-card h2 {
+        font-size: 18px;
+        color: #333;
+        overflow-wrap: anywhere;
+    }
+    .product-card p {
+        color: #666;
+        line-height: 1.5;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+    .product-card img {
+        display: block;
+        width: 150px;
+        height: 150px;
+        object-fit: contain;
+        margin: 15px auto;
+    }
+    .product-card .price {
+        font-size: 20px;
+        font-weight: bold;
+        color: #ff7700;
+        margin-top: auto;
+    }
+    .buy{
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 6px;
+        background-color: #ff7800;
+        color:#392020;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+    <h1>Ecom</h1>
+    <script>
+        const productsContainer = document.createElement('div');
+        productsContainer.className = 'products-container';
+        fetch('https://fakestoreapi.com/products')
+            .then(response => response.json())
+            .then(products => {
+                products.forEach(product => {
+                    const productDiv = document.createElement('div');
+                    productDiv.className = 'product-card';
+                    productDiv.innerHTML = `
+                        <img src="${product.image}" alt="${product.title}">
+                        <h2>${product.title}</h2>
+                        <p>${product.description}</p>
+                        <p class="price"> $${product.price} </p>
+                        <button class="Buy-button"> Buy</button> `;
+                    productsContainer.appendChild(productDiv);
+                });
+                document.body.appendChild(productsContainer);
+            });
+    </script>
+</body>
+</html>

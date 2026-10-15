@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WPM Checker</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin-top: 100px;
+        }
+        textarea {
+            width: 400px;
+            height: 100px;
+            padding: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Typing Speed Test</h1>
+    <p id="text"></p>
+    <textarea id="input" placeholder="Type the sentence here"></textarea>
+    <br>
+    <button onclick="start()">Start</button>
+    <button onclick="check()">Check WPM</button>
+    <h2 id="result"></h2>
+    <script>
+        let startTime;
+        function start() {
+            document.getElementById("input").value = "";
+            startTime = new Date();
+            document.getElementById("input").focus();
+        }
+        function check() {
+            let typedText = document.getElementById("input").value;
+            let endTime = new Date();
+            let time =(endTime - startTime) / 1000;
+            let minutes = time / 60;
+            let words =typedText.trim().split().length;
+            let wpm =words / minutes;
+            document.getElementById("result").innerText ="WPM : " + Math.round(wpm);
+        }
+    </script>
+</body>
+</html>

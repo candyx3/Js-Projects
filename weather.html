@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: lightblue;
+            text-align: center;
+            padding-top: 100px;
+        }
+        .weather {
+            background-color: white;
+            width: 300px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 10px;
+        }
+        input {
+            padding: 10px;
+            width: 180px;
+        }
+        button {
+            padding: 10px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="weather">
+        <h1>Weather App</h1>
+        <input type="text" id="city" placeholder="Enter city">
+        <button onclick="getWeather()">Search</button>
+        <div id="result"></div>
+    </div>
+    <script>
+        function getWeather() {
+        let city = document.getElementById("city").value;
+        if (city === "") {
+            document.getElementById("result").innerHTML = "<p class='error'>Please enter a city</p>";
+            return;}
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=1adff1bb5772d2a212a1c65d278569ea&units=metric`)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            document.getElementById("result").innerHTML = `
+                <h2>${data.name}</h2>
+                <h3>${data.main.temp} °C</h3>
+                <p>Weather: ${data.weather[0].description}</p>
+                <p>Humidity: ${data.main.humidity}%</p>`;
+        })
+}
+    </script>
+</body>
+</html>
